@@ -57,13 +57,19 @@ public class rechner {
 		
 		//binär in dez
 		if(ozahlensystem == 10 && izahlensystem == 2){
-			String istring = Integer.toString(izahlensystem);
+			//System.out.println("hello world");
+			String istring = Integer.toString(zahl);
+			//String istring = stringdreher(inputstring);
 			int zähler = 1;
 			int ergebnis = 0;
+			System.out.println("the string " + istring);
 			for(int i=istring.length() - 1; i >= 0; i = i -1){
+				
+				//char sposition = istring.charAt(i);
+				int x = Character.getNumericValue(istring.charAt(i));
+				System.out.println(x);
+				ergebnis = ergebnis + (x * zähler);
 				zähler = zähler * 2;
-				char sposition = istring.charAt(i);
-				ergebnis = ergebnis + ((int)sposition * zähler);
 			}
 			endergebnis = Integer.toString(ergebnis);
 		}
