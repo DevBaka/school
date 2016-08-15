@@ -15,7 +15,7 @@ conky.config = {
     gap_x = 50,
     gap_y = 50,
     minimum_height = 5,
-    minimum_width = 550,
+    minimum_width = 5,
     net_avg_samples = 2,
     no_buffers = true,
     out_to_console = false,
@@ -47,18 +47,14 @@ ${color CC9900}NETWORKING ${hr 2}$color
 UP: ${upspeed eth0} Down: ${downspeed eth0}
 Port ${tcp_portmon 1 65535 rhost 0} ${tcp_portmon 1 65535 rip 0} ${tcp_portmon 1 65535 rservice 0} ${tcp_portmon 1 65535 lport 0} ${tcp_portmon 1 65535 rport 0}
 
-${color #246eb5}Total Connections = ${tcp_portmon 1 65535 count}$color
- ${color green}Hostname$color${goto 320} ${color yellow}Remote IP ${goto 415} ${color #246eb5}Proto ${goto 450} Local ${goto 495}Remote$color
- ------------------------------------------------------------------------- ${goto 453} Port ${goto 495} Port
- ${tcp_portmon 1 65535 rhost 0} ${goto 120} ${tcp_portmon 1 65535 rip 0} ${goto 415} ${tcp_portmon 1 65535 rservice 0} ${goto 450} ${color red}${tcp_portmon 1 65535 lport 0} ${goto 505}${tcp_portmon 1 65535 rport 0}$color
- ${tcp_portmon 1 65535 rhost 1} ${goto 120} ${tcp_portmon 1 65535 rip 1} ${goto 415} ${tcp_portmon 1 65535 rservice 1} ${goto 450} ${color red}${tcp_portmon 1 65535 lport 1} ${goto 505}${tcp_portmon 1 65535 rport 1}$color
- ${tcp_portmon 1 65535 rhost 2} ${goto 120} ${tcp_portmon 1 65535 rip 2} ${goto 415} ${tcp_portmon 1 65535 rservice 2} ${goto 450} ${color red}${tcp_portmon 1 65535 lport 2} ${goto 505}${tcp_portmon 1 65535 rport 2}$color
- ${tcp_portmon 1 65535 rhost 3} ${goto 120} ${tcp_portmon 1 65535 rip 3} ${goto 415} ${tcp_portmon 1 65535 rservice 3} ${goto 450} ${color red}${tcp_portmon 1 65535 lport 3} ${goto 505}${tcp_portmon 1 65535 rport 3}$color
- ${tcp_portmon 1 65535 rhost 4} ${goto 120} ${tcp_portmon 1 65535 rip 4} ${goto 415} ${tcp_portmon 1 65535 rservice 4} ${goto 450} ${color red}${tcp_portmon 1 65535 lport 4} ${goto 505}${tcp_portmon 1 65535 rport 4}$color
- ${tcp_portmon 1 65535 rhost 5} ${goto 120} ${tcp_portmon 1 65535 rip 5} ${goto 415} ${tcp_portmon 1 65535 rservice 5} ${goto 450} ${color red}${tcp_portmon 1 65535 lport 5} ${goto 505}${tcp_portmon 1 65535 rport 5}$color
- ${tcp_portmon 1 65535 rhost 6} ${goto 120} ${tcp_portmon 1 65535 rip 6} ${goto 415} ${tcp_portmon 1 65535 rservice 6} ${goto 450} ${color red}${tcp_portmon 1 65535 lport 6} ${goto 505}${tcp_portmon 1 65535 rport 6}$color
- ${tcp_portmon 1 65535 rhost 7} ${goto 120} ${tcp_portmon 1 65535 rip 7} ${goto 415} ${tcp_portmon 1 65535 rservice 7} ${goto 450} ${color red}${tcp_portmon 1 65535 lport 7} ${goto 505}${tcp_portmon 1 65535 rport 7}$color
- ${tcp_portmon 1 65535 rhost 8} ${goto 120} ${tcp_portmon 1 65535 rip 8} ${goto 415} ${tcp_portmon 1 65535 rservice 8} ${goto 450} ${color red}${tcp_portmon 1 65535 lport 8} ${goto 505}${tcp_portmon 1 65535 rport 8}$color
- ${tcp_portmon 1 65535 rhost 9} ${goto 120} ${tcp_portmon 1 65535 rip 9} ${goto 415} ${tcp_portmon 1 65535 rservice 9} ${goto 450} ${color red}${tcp_portmon 1 65535 lport 9} ${goto 505}${tcp_portmon 1 65535 rport 9}$color
+
+Ports:
+${color Tan2}ESTABLISHED Connections${color DarkSlateGray}${hr 2}
+
+${offset 10}${color lightgrey}Inbound: ${color white}${tcp_portmon 1 32767 count}    ${color lightgrey}Outbound: ${color white}${tcp_portmon 32768 61000 count}  ${color lightgrey}Total: ${color white}${tcp_portmon 1 65535 count}
+
+${color slate grey}Process  ${color slate grey}Remote IP ${color slate grey}L-Port ${color slate grey}${goto 415}R-Port${color lightgrey}
+
+${font Ubuntu Mono:size=8}${texeci 30 netstat -anp | grep 'ESTABLISHED' | sed -r 's|.*[0-9].[0-9.]+:([0-9]*)\s*([0-9.]+):([0-9]+)[^/]+/([a-zA-Z0-9]*)|\4 \2 \1 \3|' | awk '{printf("%-14s %-15s %5s %5s\n",$1,$2,$3,$4)}'}
 
 ]]
